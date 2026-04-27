@@ -1,0 +1,85 @@
+<!-- Not used: this project is a REST API -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AVL Tree Studio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="noise"></div>
+
+    <header class="topbar">
+        <div class="brand">
+            <h1>AVL Tree Studio</h1>
+            <p>Balanced Binary Search Tree Visualizer</p>
+        </div>
+        <span class="badge" id="statusBadge">Connecting...</span>
+    </header>
+
+    <main class="layout">
+        <aside class="panel controls">
+            <h2>Operations</h2>
+
+            <label for="singleValue">Single value</label>
+            <div class="row">
+                <input id="singleValue" type="number" placeholder="e.g. 42" />
+                <button class="btn primary" id="insertBtn">Insert</button>
+            </div>
+
+            <div class="row triple">
+                <button class="btn" id="deleteBtn">Delete</button>
+                <button class="btn" id="searchBtn">Search</button>
+                <button class="btn" id="clearBtn">Clear</button>
+            </div>
+
+            <label for="batchValues">Batch insert (comma separated)</label>
+            <textarea id="batchValues" rows="3" placeholder="15, 10, 20, 8, 12, 17, 25"></textarea>
+            <button class="btn accent" id="batchInsertBtn">Insert Batch</button>
+
+            <div class="row">
+                <label for="randomCount">Random count</label>
+                <input id="randomCount" type="number" min="3" max="20" value="9" />
+                <button class="btn" id="randomBtn">Random Tree</button>
+            </div>
+
+            <div class="info-box" id="messageBox">Ready.</div>
+        </aside>
+
+        <section class="panel visual">
+            <div class="visual-header">
+                <h2>Tree View</h2>
+                <span id="treeMeta">Nodes: 0</span>
+            </div>
+            <div id="treeViewport" class="tree-viewport"></div>
+        </section>
+
+        <aside class="panel stats">
+            <h2>Traversals</h2>
+
+            <div class="stat-block">
+                <h3>Inorder</h3>
+                <p id="inorderOutput">-</p>
+            </div>
+
+            <div class="stat-block">
+                <h3>Preorder</h3>
+                <p id="preorderOutput">-</p>
+            </div>
+
+            <div class="stat-block">
+                <h3>Postorder</h3>
+                <p id="postorderOutput">-</p>
+            </div>
+
+            <div class="stat-block">
+                <h3>Search Path</h3>
+                <p id="searchPathOutput">-</p>
+            </div>
+        </aside>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
