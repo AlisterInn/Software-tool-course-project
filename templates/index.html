@@ -1,85 +1,31 @@
-<!-- Not used: this project is a REST API -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AVL Tree Studio</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-</head>
-<body>
-    <div class="noise"></div>
-
-    <header class="topbar">
-        <div class="brand">
-            <h1>AVL Tree Studio</h1>
-            <p>Balanced Binary Search Tree Visualizer</p>
-        </div>
-        <span class="badge" id="statusBadge">Connecting...</span>
-    </header>
-
-    <main class="layout">
-        <aside class="panel controls">
-            <h2>Operations</h2>
-
-            <label for="singleValue">Single value</label>
-            <div class="row">
-                <input id="singleValue" type="number" placeholder="e.g. 42" />
-                <button class="btn primary" id="insertBtn">Insert</button>
-            </div>
-
-            <div class="row triple">
-                <button class="btn" id="deleteBtn">Delete</button>
-                <button class="btn" id="searchBtn">Search</button>
-                <button class="btn" id="clearBtn">Clear</button>
-            </div>
-
-            <label for="batchValues">Batch insert (comma separated)</label>
-            <textarea id="batchValues" rows="3" placeholder="15, 10, 20, 8, 12, 17, 25"></textarea>
-            <button class="btn accent" id="batchInsertBtn">Insert Batch</button>
-
-            <div class="row">
-                <label for="randomCount">Random count</label>
-                <input id="randomCount" type="number" min="3" max="20" value="9" />
-                <button class="btn" id="randomBtn">Random Tree</button>
-            </div>
-
-            <div class="info-box" id="messageBox">Ready.</div>
-        </aside>
-
-        <section class="panel visual">
-            <div class="visual-header">
-                <h2>Tree View</h2>
-                <span id="treeMeta">Nodes: 0</span>
-            </div>
-            <div id="treeViewport" class="tree-viewport"></div>
-        </section>
-
-        <aside class="panel stats">
-            <h2>Traversals</h2>
-
-            <div class="stat-block">
-                <h3>Inorder</h3>
-                <p id="inorderOutput">-</p>
-            </div>
-
-            <div class="stat-block">
-                <h3>Preorder</h3>
-                <p id="preorderOutput">-</p>
-            </div>
-
-            <div class="stat-block">
-                <h3>Postorder</h3>
-                <p id="postorderOutput">-</p>
-            </div>
-
-            <div class="stat-block">
-                <h3>Search Path</h3>
-                <p id="searchPathOutput">-</p>
-            </div>
-        </aside>
-    </main>
-
-    <script src="{{ url_for('static', filename='app.js') }}"></script>
-</body>
-</html>
+﻿{% extends "base.html" %}
+{% block title %}Products - ShopFlask{% endblock %}
+{% block content %}
+<h1 class="page-title">Products</h1>
+{% if products %}
+<div class="product-grid">
+  {% for p in products %}
+  <div class="product-card">
+    <div class="product-info">
+      <h2>{{ p.name }}</h2>
+      <p class="description">{{ p.description or "No description." }}</p>
+      <p class="price">${{ "%.2f"|format(p.price) }}</p>
+      <p class="stock {% if p.stock == 0 %}out{% endif %}">
+        {% if p.stock > 0 %}In stock: {{ p.stock }}{% else %}Out of stock{% endif %}
+      </p>
+    </div>
+    {% if current_user.is_authenticated and p.stock > 0 %}
+    <form action="{{ url_for('add_to_cart', product_id=p.id) }}" method="post" class="add-form">
+      <input type="number" name="quantity" value="1" min="1" max="{{ p.stock }}" class="qty-input">
+      <button type="submit" class="btn btn-primary">Add to Cart</button>
+    </form>
+    {% elif not current_user.is_authenticated %}
+    <a href="{{ url_for('login') }}" class="btn btn-secondary">Login to buy</a>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="empty-msg">No products yet. <a href="{{ url_for('add_product') }}">Add one!</a></p>
+{% endif %}
+{% endblock %}

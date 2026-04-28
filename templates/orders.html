@@ -1,0 +1,31 @@
+﻿{% extends "base.html" %}
+{% block title %}Orders - ShopFlask{% endblock %}
+{% block content %}
+<h1 class="page-title">Your Orders</h1>
+{% if orders %}
+  {% for order in orders %}
+  <div class="order-card">
+    <div class="order-header">
+      <span>Order #{{ order.id }}</span>
+      <span>{{ order.created_at.strftime("%b %d, %Y %H:%M") }}</span>
+      <span class="order-total">Total: ${{ "%.2f"|format(order.total) }}</span>
+    </div>
+    <table class="table">
+      <thead><tr><th>Product</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr></thead>
+      <tbody>
+      {% for item in order.items %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ "%.2f"|format(item.price_at_purchase) }}</td>
+        <td>${{ "%.2f"|format(item.price_at_purchase * item.quantity) }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endfor %}
+{% else %}
+<p class="empty-msg">No orders yet. <a href="{{ url_for('index') }}">Start shopping!</a></p>
+{% endif %}
+{% endblock %}
