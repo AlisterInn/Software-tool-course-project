@@ -1,0 +1,123 @@
+﻿*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f3f4f6;
+  color: #111;
+}
+
+/* ── Navbar ── */
+.navbar {
+  background: #131921;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.brand {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #febd69;
+  text-decoration: none;
+}
+.nav-links { display: flex; align-items: center; gap: 1.2rem; }
+.nav-links a { color: #fff; text-decoration: none; font-size: 0.95rem; }
+.nav-links a:hover { color: #febd69; }
+.nav-user { color: #febd69; font-size: 0.9rem; }
+
+/* ── Container ── */
+.container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+
+/* ── Alerts ── */
+.alert { padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1rem; font-size: 0.95rem; }
+.alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.alert-error   { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+/* ── Page title ── */
+.page-title { font-size: 1.6rem; margin-bottom: 1.5rem; }
+
+/* ── Product grid ── */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+.product-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.product-card h2 { font-size: 1rem; margin-bottom: 0.4rem; }
+.description { font-size: 0.85rem; color: #555; margin-bottom: 0.5rem; }
+.price { font-size: 1.3rem; font-weight: 700; color: #b12704; margin-bottom: 0.3rem; }
+.stock { font-size: 0.82rem; color: #007600; margin-bottom: 0.75rem; }
+.stock.out { color: #c00; }
+.add-form { display: flex; gap: 0.5rem; align-items: center; margin-top: auto; }
+.qty-input { width: 60px; padding: 0.35rem; border: 1px solid #ccc; border-radius: 4px; }
+
+/* ── Buttons ── */
+.btn {
+  padding: 0.45rem 1rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary  { background: #febd69; color: #111; font-weight: 600; }
+.btn-primary:hover { background: #f3a847; }
+.btn-secondary { background: #e7e7e7; color: #111; }
+.btn-secondary:hover { background: #d0d0d0; }
+.btn-danger   { background: #cc0c39; color: #fff; }
+.btn-danger:hover { background: #a00; }
+.btn-sm { padding: 0.3rem 0.7rem; font-size: 0.82rem; }
+.full-width { width: 100%; text-align: center; margin-top: 0.75rem; }
+
+/* ── Auth card ── */
+.auth-card {
+  background: #fff;
+  max-width: 420px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+.auth-card h1 { font-size: 1.4rem; margin-bottom: 1.25rem; }
+.auth-card label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.25rem; margin-top: 0.75rem; }
+.auth-card input, .auth-card textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+.auth-card textarea { resize: vertical; }
+.auth-link { text-align: center; margin-top: 1rem; font-size: 0.9rem; }
+
+/* ── Table ── */
+.table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; margin-bottom: 1rem; }
+.table th { background: #232f3e; color: #fff; padding: 0.6rem 1rem; text-align: left; font-size: 0.9rem; }
+.table td { padding: 0.65rem 1rem; border-bottom: 1px solid #eee; font-size: 0.92rem; }
+.table tr:last-child td { border-bottom: none; }
+
+/* ── Cart footer ── */
+.cart-footer { display: flex; justify-content: flex-end; align-items: center; gap: 1.5rem; }
+.cart-total { font-size: 1.1rem; }
+
+/* ── Order card ── */
+.order-card { background: #fff; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.1); overflow: hidden; }
+.order-header { background: #232f3e; color: #fff; padding: 0.75rem 1rem; display: flex; gap: 2rem; font-size: 0.92rem; }
+.order-total { margin-left: auto; font-weight: 700; }
+
+/* ── Empty msg ── */
+.empty-msg { color: #555; font-size: 1rem; }

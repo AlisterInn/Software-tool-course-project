@@ -1,0 +1,33 @@
+﻿{% extends "base.html" %}
+{% block title %}Cart - ShopFlask{% endblock %}
+{% block content %}
+<h1 class="page-title">Your Cart</h1>
+{% if items %}
+<table class="table">
+  <thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th><th></th></tr></thead>
+  <tbody>
+  {% for item in items %}
+  <tr>
+    <td>{{ item.product.name }}</td>
+    <td>${{ "%.2f"|format(item.product.price) }}</td>
+    <td>{{ item.quantity }}</td>
+    <td>${{ "%.2f"|format(item.product.price * item.quantity) }}</td>
+    <td>
+      <form action="{{ url_for('remove_from_cart', item_id=item.id) }}" method="post">
+        <button class="btn btn-danger btn-sm">Remove</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<div class="cart-footer">
+  <span class="cart-total">Total: <strong>${{ "%.2f"|format(total) }}</strong></span>
+  <form action="{{ url_for('checkout') }}" method="post">
+    <button type="submit" class="btn btn-primary">Place Order</button>
+  </form>
+</div>
+{% else %}
+<p class="empty-msg">Your cart is empty. <a href="{{ url_for('index') }}">Browse products</a></p>
+{% endif %}
+{% endblock %}

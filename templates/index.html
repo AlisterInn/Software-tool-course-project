@@ -1,0 +1,31 @@
+﻿{% extends "base.html" %}
+{% block title %}Products - ShopFlask{% endblock %}
+{% block content %}
+<h1 class="page-title">Products</h1>
+{% if products %}
+<div class="product-grid">
+  {% for p in products %}
+  <div class="product-card">
+    <div class="product-info">
+      <h2>{{ p.name }}</h2>
+      <p class="description">{{ p.description or "No description." }}</p>
+      <p class="price">${{ "%.2f"|format(p.price) }}</p>
+      <p class="stock {% if p.stock == 0 %}out{% endif %}">
+        {% if p.stock > 0 %}In stock: {{ p.stock }}{% else %}Out of stock{% endif %}
+      </p>
+    </div>
+    {% if current_user.is_authenticated and p.stock > 0 %}
+    <form action="{{ url_for('add_to_cart', product_id=p.id) }}" method="post" class="add-form">
+      <input type="number" name="quantity" value="1" min="1" max="{{ p.stock }}" class="qty-input">
+      <button type="submit" class="btn btn-primary">Add to Cart</button>
+    </form>
+    {% elif not current_user.is_authenticated %}
+    <a href="{{ url_for('login') }}" class="btn btn-secondary">Login to buy</a>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="empty-msg">No products yet. <a href="{{ url_for('add_product') }}">Add one!</a></p>
+{% endif %}
+{% endblock %}

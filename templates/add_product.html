@@ -1,0 +1,18 @@
+﻿{% extends "base.html" %}
+{% block title %}Add Product - ShopFlask{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <h1>Add Product</h1>
+  <form method="post">
+    <label>Name</label>
+    <input type="text" name="name" required autofocus>
+    <label>Description</label>
+    <textarea name="description" rows="3"></textarea>
+    <label>Price ($)</label>
+    <input type="number" name="price" step="0.01" min="0" required>
+    <label>Stock</label>
+    <input type="number" name="stock" min="0" value="0" required>
+    <button type="submit" class="btn btn-primary full-width">Add Product</button>
+  </form>
+</div>
+{% endblock %}
